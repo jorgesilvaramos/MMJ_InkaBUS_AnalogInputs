@@ -1,0 +1,29 @@
+{
+  "name": "MMJ_InkaBUS_AnalogInputs",
+  "version": "1.0.0",
+  "description": "Industrial ADS1115 driver with voltage and current input support, dual board layouts (InkaLogic Pro / MikroBUS), and interrupt-based acquisition modes.",
+  "keywords": [
+    "ADS1115",
+    "ADC",
+    "industrial",
+    "analog",
+    "mikrobus",
+    "inkalogic",
+    "inka",
+    "i2c",
+    "current loop",
+    "0-10V"
+  ],
+  "authors": [
+    {
+      "name": "Jorge A. Silva",
+      "maintainer": true
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jorgesilvaramos/MMJ_InkaBUS_AnalogInputs"
+  },
+  "frameworks": "arduino",
+  "platforms": "*"
+}

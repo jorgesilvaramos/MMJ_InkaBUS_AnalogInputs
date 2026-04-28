@@ -1,0 +1,57 @@
+##############################################################
+# Syntax Coloring Map for MMJ_InkaBUS_AnalogInputs
+##############################################################
+
+MMJ_InkaBUS_AnalogInputs	KEYWORD1
+
+Inka_AnalogInputInit	KEYWORD2
+Inka_AnalogInSetDevice	KEYWORD2
+Inka_AnalogConfigureContinuous	KEYWORD2
+Inka_AnalogRead	KEYWORD2
+Inka_AnalogStartConversion	KEYWORD2
+Inka_AnalogReadResult	KEYWORD2
+Inka_AnalogReadScaled	KEYWORD2
+
+InkaBUS_AnalogInputInit	KEYWORD2
+InkaBUS_AnalogConfigureContinuous	KEYWORD2
+InkaBUS_AnalogRead	KEYWORD2
+InkaBUS_AnalogStartConversion	KEYWORD2
+InkaBUS_AnalogReadResult	KEYWORD2
+InkaBUS_AnalogReadScaled	KEYWORD2
+
+InkaLogic_AnalogInputInit	KEYWORD2
+InkaLogic_AnalogConfigureContinuous	KEYWORD2
+InkaLogic_AnalogRead	KEYWORD2
+InkaLogic_AnalogStartConversion	KEYWORD2
+InkaLogic_AnalogReadResult	KEYWORD2
+InkaLogic_AnalogReadScaled	KEYWORD2
+
+device_t	KEYWORD3
+analog_mode_t	KEYWORD3
+irq_mode_t	KEYWORD3
+read_mode_t	KEYWORD3
+
+INKA_AI_I2C_ADDRESS_0	LITERAL1
+INKA_AI_I2C_ADDRESS_1	LITERAL1
+
+DEVICE_MIKROBUS	LITERAL1
+DEVICE_INKALOGIC_PRO	LITERAL1
+
+ANALOG_MODE_CURRENT	LITERAL1
+ANALOG_MODE_VOLT	LITERAL1
+
+IRQ_NONE	LITERAL1
+IRQ_INTERNAL	LITERAL1
+IRQ_EXTERNAL	LITERAL1
+
+SINGLE	LITERAL1
+CONTINUOUS	LITERAL1
+
+RATE_8SPS	LITERAL1
+RATE_16SPS	LITERAL1
+RATE_32SPS	LITERAL1
+RATE_64SPS	LITERAL1
+RATE_128SPS	LITERAL1
+RATE_250SPS	LITERAL1
+RATE_475SPS	LITERAL1
+RATE_860SPS	LITERAL1
