@@ -1,6 +1,6 @@
 {
   "name": "MMJ_InkaBUS_AnalogInputs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Industrial ADS1115 driver with voltage and current input support, dual board layouts (InkaLogic Pro / MikroBUS), and interrupt-based acquisition modes.",
   "keywords": [
     "ADS1115",
