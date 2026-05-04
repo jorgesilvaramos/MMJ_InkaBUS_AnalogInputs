@@ -8,7 +8,7 @@
 static uint8_t      current_i2c_address = INKA_AI_I2C_ADDRESS_0;
 static read_mode_t  current_read_mode   = SINGLE;
 static uint8_t      current_data_rate   = RATE_128SPS;
-static device_t     current_device      = DEVICE_INKALOGIC_PRO;
+static device_t     current_device      = DEVICE_INKALOGIC_PRO_AI;
 static int8_t       current_irq_pin     = -1;
 static irq_mode_t   current_irq_mode    = IRQ_NONE;
 
@@ -161,7 +161,7 @@ bool Inka_AnalogInputInit(uint8_t     addr,
     }
 
     // Apply the default device layout so the MUX table is always valid.
-    Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO);
+    Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO_AI);
 
     return true;
 }
@@ -337,9 +337,9 @@ float InkaBUS_AnalogReadScaled(float rawADC, float y1, float y2, float x1, float
     return Inka_AnalogReadScaled(rawADC, y1, y2, x1, x2);
 }
 
-// ─── Branded API for DEVICE_INKALOGIC_PRO (InkaLogic prefix) ──────────────────
+// ─── Branded API for DEVICE_INKALOGIC_PRO_AI (InkaLogic prefix) ──────────────────
 //
-// Strategy: Each function (except Init) automatically sets DEVICE_INKALOGIC_PRO
+// Strategy: Each function (except Init) automatically sets DEVICE_INKALOGIC_PRO_AI
 // before delegating to the corresponding Inka_* function. See InkaBUS rationale above.
 //
 
@@ -354,19 +354,19 @@ bool InkaLogic_AnalogInputInit(uint8_t     addr,
 
 bool InkaLogic_AnalogConfigureContinuous(analog_mode_t mode, uint8_t channel)
 {
-    Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO);
+    Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO_AI);
     return Inka_AnalogConfigureContinuous(mode, channel);
 }
 
 int16_t InkaLogic_AnalogRead(analog_mode_t mode, uint8_t channel)
 {
-    Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO);
+    Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO_AI);
     return Inka_AnalogRead(mode, channel);
 }
 
 bool InkaLogic_AnalogStartConversion(analog_mode_t mode, uint8_t channel)
 {
-    Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO);
+    Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO_AI);
     return Inka_AnalogStartConversion(mode, channel);
 }
 

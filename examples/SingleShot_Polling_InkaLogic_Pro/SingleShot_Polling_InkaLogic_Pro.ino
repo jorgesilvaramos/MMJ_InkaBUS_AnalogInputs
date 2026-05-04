@@ -41,7 +41,7 @@ void setup() {
     Wire.begin(21, 22, 100000);  // SDA=21, SCL=22, 100kHz I2C clock
 
     // Initialize ADS1115 with default settings for InkaLogic Pro
-    // This automatically sets DEVICE_INKALOGIC_PRO for single-ended channels
+    // This automatically sets DEVICE_INKALOGIC_PRO_AI for single-ended channels
     if (!InkaLogic_AnalogInputInit()) {
         Serial.println("ADS1115 initialization failed! Check I2C connections.");
         while (1);  // Halt execution on failure

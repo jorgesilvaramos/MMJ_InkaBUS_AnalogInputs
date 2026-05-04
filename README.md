@@ -14,7 +14,7 @@ A comprehensive driver library for the ADS1115 16-bit ADC used in Inka analog in
 
 ## Hardware Support
 
-### DEVICE_INKALOGIC_PRO (InkaLogic)
+### DEVICE_INKALOGIC_PRO_AI (InkaLogic)
 - **Channels**: 4 single-ended inputs (AIN0, AIN1, AIN2, AIN3 vs GND).
 - **Signal Conditioning**: 1/5 voltage divider for 0–10 V or 0–24 mA with 200 Ω shunt.
 - **PGA Ranges**: ±2.048 V (voltage) or ±1.024 V (current).
@@ -56,7 +56,7 @@ void setup() {
     }
 
     // Set device type (required before first read)
-    Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO);  // or DEVICE_MIKROBUS
+    Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO_AI);  // or DEVICE_MIKROBUS
 }
 ```
 
@@ -157,7 +157,7 @@ void loop() {
 
 #### Initialization
 - `Inka_AnalogInputInit(addr, mode, data_rate, irq_pin, irq_mode)`: Initialize ADS1115.
-- `Inka_AnalogInSetDevice(device)`: Set board layout (DEVICE_MIKROBUS or DEVICE_INKALOGIC_PRO).
+- `Inka_AnalogInSetDevice(device)`: Set board layout (DEVICE_MIKROBUS or DEVICE_INKALOGIC_PRO_AI).
 
 #### Reading
 - `Inka_AnalogRead(mode, channel)`: Blocking read with configuration.
@@ -188,7 +188,7 @@ void loop() {
 
 ### Enums and Constants
 
-- `device_t`: `DEVICE_MIKROBUS`, `DEVICE_INKALOGIC_PRO`
+- `device_t`: `DEVICE_MIKROBUS`, `DEVICE_INKALOGIC_PRO_AI`
 - `analog_mode_t`: `ANALOG_MODE_CURRENT`, `ANALOG_MODE_VOLT`
 - `read_mode_t`: `SINGLE`, `CONTINUOUS`
 - `irq_mode_t`: `IRQ_NONE`, `IRQ_INTERNAL`, `IRQ_EXTERNAL`

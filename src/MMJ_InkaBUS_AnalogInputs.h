@@ -76,7 +76,7 @@
 #define MODE_CONTINUOUS         (0U << 8)   // Device operates continuously
 #define MODE_SINGLE_SHOT        (1U << 8)   // Device powers down after each conversion (default)
 
-// ─── MUX: single-ended inputs (used by DEVICE_INKALOGIC_PRO) ─────────────────
+// ─── MUX: single-ended inputs (used by DEVICE_INKALOGIC_PRO_AI) ─────────────────
 #define MUX_AN0                 (0b100U << 12)   // AIN0 vs GND
 #define MUX_AN1                 (0b101U << 12)   // AIN1 vs GND
 #define MUX_AN2                 (0b110U << 12)   // AIN2 vs GND
@@ -137,7 +137,7 @@ typedef enum {
 /** Physical board layout. Determines MUX wiring and available channels. */
 typedef enum {
     DEVICE_MIKROBUS      = 0,   ///< 2 differential channels (AIN0−AIN1, AIN2−AIN3)
-    DEVICE_INKALOGIC_PRO = 1    ///< 4 single-ended channels (AIN0…AIN3 vs GND)
+    DEVICE_INKALOGIC_PRO_AI = 1    ///< 4 single-ended channels (AIN0…AIN3 vs GND)
 } device_t;
 
 /**
@@ -228,15 +228,15 @@ bool Inka_AnalogInputInit(uint8_t     addr      = INKA_AI_I2C_ADDRESS_0,
  *  This call affects how the channel argument of Inka_AnalogRead() is
  *  mapped to the ADS1115 MUX bits:
  *
- *    DEVICE_INKALOGIC_PRO  channel 0–3 → MUX_AN0 … MUX_AN3  (single-ended)
+ *    DEVICE_INKALOGIC_PRO_AI  channel 0–3 → MUX_AN0 … MUX_AN3  (single-ended)
  *    DEVICE_MIKROBUS       channel 0–1 → MUX_DIFF_AN0, MUX_DIFF_AN1 (differential)
  *
- * @param  device  Board variant. Default: DEVICE_INKALOGIC_PRO.
+ * @param  device  Board variant. Default: DEVICE_INKALOGIC_PRO_AI.
  *
  * @note   Call this before the first Inka_AnalogRead(). The default is
- *         DEVICE_INKALOGIC_PRO, so this call can be omitted on that board.
+ *         DEVICE_INKALOGIC_PRO_AI, so this call can be omitted on that board.
  */
-void Inka_AnalogInSetDevice(device_t device = DEVICE_INKALOGIC_PRO);
+void Inka_AnalogInSetDevice(device_t device = DEVICE_INKALOGIC_PRO_AI);
 
 
 /**
@@ -273,7 +273,7 @@ void Inka_AnalogInSetDevice(device_t device = DEVICE_INKALOGIC_PRO);
  *                  Selects the PGA range and expected input scaling.
  *
  * @param  channel  Input channel index:
- *                    DEVICE_INKALOGIC_PRO → 0 to 3 (single-ended)
+ *                    DEVICE_INKALOGIC_PRO_AI → 0 to 3 (single-ended)
  *                    DEVICE_MIKROBUS      → 0 or 1 (differential)
  *
  * @return true   Configuration was written and the ADC is producing
@@ -321,7 +321,7 @@ bool Inka_AnalogConfigureContinuous(analog_mode_t mode, uint8_t channel);
  *                  Selects the PGA range (±1.024 V or ±2.048 V).
  *
  * @param  channel  Input channel index:
- *                    DEVICE_INKALOGIC_PRO → 0 to 3
+ *                    DEVICE_INKALOGIC_PRO_AI → 0 to 3
  *                    DEVICE_MIKROBUS      → 0 or 1
  *
  * @return Raw signed ADC counts (int16_t) in the range 0–32767 for Inka
@@ -517,10 +517,10 @@ int16_t InkaBUS_AnalogReadResult();
  */
 float InkaBUS_AnalogReadScaled(float rawADC, float y1, float y2, float x1, float x2);
 
-// ─── Branded API for DEVICE_INKALOGIC_PRO (InkaLogic prefix) ──────────────────
+// ─── Branded API for DEVICE_INKALOGIC_PRO_AI (InkaLogic prefix) ──────────────────
 //
 // The following functions provide a branded API for InkaLogic modules with
-// single-ended channel configuration. They automatically invoke Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO)
+// single-ended channel configuration. They automatically invoke Inka_AnalogInSetDevice(DEVICE_INKALOGIC_PRO_AI)
 // on each call to ensure the correct device layout is active, eliminating the need for
 // explicit device selection in application code.
 //
@@ -550,7 +550,7 @@ float InkaBUS_AnalogReadScaled(float rawADC, float y1, float y2, float x1, float
  * @return false  I2C communication failed.
  *
  * @note  Call this once at startup after Wire.begin().
- * @note  Subsequent InkaLogic_Analog*() calls will automatically set DEVICE_INKALOGIC_PRO.
+ * @note  Subsequent InkaLogic_Analog*() calls will automatically set DEVICE_INKALOGIC_PRO_AI.
  */
 bool InkaLogic_AnalogInputInit(uint8_t     addr      = INKA_AI_I2C_ADDRESS_0,
                                read_mode_t mode      = SINGLE,
@@ -561,7 +561,7 @@ bool InkaLogic_AnalogInputInit(uint8_t     addr      = INKA_AI_I2C_ADDRESS_0,
 /**
  * @brief  Configure the ADS1115 for continuous conversion on a fixed channel (InkaLogic).
  *
- *  Automatically sets DEVICE_INKALOGIC_PRO (4 single-ended channels) before configuration.
+ *  Automatically sets DEVICE_INKALOGIC_PRO_AI (4 single-ended channels) before configuration.
  *
  * @param  mode     Signal type: ANALOG_MODE_CURRENT or ANALOG_MODE_VOLT.
  * @param  channel  Single-ended channel: 0, 1, 2, or 3 (AIN0…AIN3 vs GND).
@@ -574,7 +574,7 @@ bool InkaLogic_AnalogConfigureContinuous(analog_mode_t mode, uint8_t channel);
 /**
  * @brief  Blocking read of a single channel (InkaLogic).
  *
- *  Automatically sets DEVICE_INKALOGIC_PRO before reading.
+ *  Automatically sets DEVICE_INKALOGIC_PRO_AI before reading.
  *  Suitable for IRQ_NONE and IRQ_INTERNAL modes only.
  *
  * @param  mode     Signal type: ANALOG_MODE_CURRENT or ANALOG_MODE_VOLT.
@@ -587,7 +587,7 @@ int16_t InkaLogic_AnalogRead(analog_mode_t mode, uint8_t channel);
 /**
  * @brief  Start a non-blocking conversion (InkaLogic, IRQ_EXTERNAL mode only).
  *
- *  Automatically sets DEVICE_INKALOGIC_PRO before starting the conversion.
+ *  Automatically sets DEVICE_INKALOGIC_PRO_AI before starting the conversion.
  *  Returns immediately; the ISR will signal completion via ALRT/RDY.
  *
  * @param  mode     Signal type: ANALOG_MODE_CURRENT or ANALOG_MODE_VOLT.
